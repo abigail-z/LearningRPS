@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
+    public Text scoreBox;
+    private int score;
     private static GameDirector instance;
 
     void Awake()
@@ -18,47 +21,52 @@ public class GameDirector : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        score = 0;
+    }
+
     public static void Play(Hand playerInput)
     {
         Hand AIInput = AIBehaviour.GetNextPlay();
-        Debug.Log("You play " + playerInput + ", AI plays " + AIInput);
         Result playerResult;
 
         if (playerInput == Hand.Rock && AIInput == Hand.Paper)
         {
-            Debug.Log("Lose");
+            instance.score -= 1;
             playerResult = Result.Lose;
         }
         else if (playerInput == Hand.Paper && AIInput == Hand.Scissors)
         {
-            Debug.Log("Lose");
+            instance.score -= 1;
             playerResult = Result.Lose;
         }
         else if (playerInput == Hand.Scissors && AIInput == Hand.Rock)
         {
-            Debug.Log("Lose");
+            instance.score -= 1;
             playerResult = Result.Lose;
         }
         else if (playerInput == Hand.Rock && AIInput == Hand.Scissors)
         {
-            Debug.Log("Win");
+            instance.score += 1;
             playerResult = Result.Win;
         }
         else if (playerInput == Hand.Scissors && AIInput == Hand.Paper)
         {
-            Debug.Log("Win");
+            instance.score += 1;
             playerResult = Result.Win;
         }
         else if (playerInput == Hand.Paper && AIInput == Hand.Rock)
         {
-            Debug.Log("Win");
+            instance.score += 1;
             playerResult = Result.Win;
         }
         else
         {
-            Debug.Log("Draw");
             playerResult = Result.Draw;
         }
+
+        instance.scoreBox.text = "Score: " + instance.score;
 
         AIBehaviour.Log(new Round
         {

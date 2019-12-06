@@ -8,6 +8,7 @@ public class AIBehaviour : MonoBehaviour
     // instance vars
     public int gramSize;
     private IStrategy strategy;
+    SpriteRenderer rock, paper, scissors;
 
     // static vars
     private static AIBehaviour instance;
@@ -21,6 +22,9 @@ public class AIBehaviour : MonoBehaviour
         else
         {
             instance = this;
+            rock = transform.Find("Rock").GetComponent<SpriteRenderer>();
+            paper = transform.Find("Paper").GetComponent<SpriteRenderer>();
+            scissors = transform.Find("Scissors").GetComponent<SpriteRenderer>();
         }
     }
 
@@ -31,11 +35,33 @@ public class AIBehaviour : MonoBehaviour
 
     public static Hand GetNextPlay()
     {
-        return instance.strategy.GetNextPlay();
+        Hand hand = instance.strategy.GetNextPlay();
+
+        instance.ShowHand(hand);
+
+        return hand;
     }
 
     public static void Log(Round round)
     {
         instance.strategy.Log(round);
+    }
+
+    public void ShowHand(Hand hand)
+    {
+        rock.enabled = paper.enabled = scissors.enabled = false;
+
+        switch (hand)
+        {
+            case Hand.Rock:
+                rock.enabled = true;
+                break;
+            case Hand.Paper:
+                paper.enabled = true;
+                break;
+            case Hand.Scissors:
+                scissors.enabled = true;
+                break;
+        }
     }
 }
