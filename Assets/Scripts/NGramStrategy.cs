@@ -14,9 +14,9 @@ public class NGramStrategy : IStrategy
     }
 
     // store the player's input in the history string
-    public void Log(Hand lastPlay)
+    public void Log(Round round)
     {
-        switch (lastPlay)
+        switch (round.player)
         {
             case Hand.Rock:
                 history += "r";

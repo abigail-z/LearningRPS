@@ -5,22 +5,25 @@ using UnityEngine;
 public class BayesianStrategy : IStrategy
 {
     readonly int size;
-    Queue<Hand> history;
+    Queue<(Hand, bool)> history;
 
     public BayesianStrategy(int maxQueueSize)
     {
         size = maxQueueSize;
-        history = new Queue<Hand>();
+        history = new Queue<(Hand, bool)>();
     }
 
     public Hand GetNextPlay()
     {
+        // probability of ai winning when playing rock
+        float rockWin;
+
         return Hand.Rock;
     }
 
-    public void Log(Hand lastPlay)
+    public void Log(Round round)
     {
-        history.Enqueue(lastPlay);
+        history.Enqueue((round.ai, round.aiWin));
         while (history.Count > size)
         {
             history.Dequeue();

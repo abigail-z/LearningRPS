@@ -4,7 +4,14 @@ using UnityEngine;
 
 public interface IStrategy
 {
-    void Log(Hand lastPlay);
+    void Log(Round round);
 
     Hand GetNextPlay();
+}
+
+public struct Round
+{
+    public Hand player;
+    public Hand ai;
+    public bool aiWin;
 }
