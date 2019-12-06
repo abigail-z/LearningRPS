@@ -34,8 +34,8 @@ public class AIBehaviour : MonoBehaviour
         return instance.strategy.GetNextPlay();
     }
 
-    public static void Log(Hand playerInput)
+    public static void Log(Round round)
     {
-        instance.strategy.Log(playerInput);
+        instance.strategy.Log(round);
     }
 }

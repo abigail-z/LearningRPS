@@ -22,6 +22,7 @@ public class GameDirector : MonoBehaviour
     {
         Hand AIInput = AIBehaviour.GetNextPlay();
         Debug.Log("You play " + playerInput + ", AI plays " + AIInput);
+        bool aiWin = false;
 
         if (playerInput == AIInput)
         {
@@ -30,28 +31,39 @@ public class GameDirector : MonoBehaviour
         else if (playerInput == Hand.Rock && AIInput == Hand.Paper)
         {
             Debug.Log("Lose");
+            aiWin = true;
         }
         else if (playerInput == Hand.Paper && AIInput == Hand.Scissors)
         {
             Debug.Log("Lose");
+            aiWin = true;
         }
         else if (playerInput == Hand.Scissors && AIInput == Hand.Rock)
         {
             Debug.Log("Lose");
+            aiWin = true;
         }
         else if (playerInput == Hand.Rock && AIInput == Hand.Scissors)
         {
             Debug.Log("Win");
+            aiWin = false;
         }
         else if (playerInput == Hand.Scissors && AIInput == Hand.Paper)
         {
             Debug.Log("Win");
+            aiWin = false;
         }
         else if (playerInput == Hand.Paper && AIInput == Hand.Rock)
         {
             Debug.Log("Win");
+            aiWin = false;
         }
 
-        AIBehaviour.Log(playerInput);
+        AIBehaviour.Log(new Round
+        {
+            player = playerInput,
+            ai = AIInput,
+            aiWin = aiWin
+        });
     }
 }
