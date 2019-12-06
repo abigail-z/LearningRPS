@@ -13,5 +13,10 @@ public struct Round
 {
     public Hand player;
     public Hand ai;
-    public bool aiWin;
+    public Result playerResult;
+}
+
+public enum Result
+{
+    Win, Lose, Draw
 }
