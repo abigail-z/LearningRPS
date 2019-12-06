@@ -28,6 +28,7 @@ public class AIBehaviour : MonoBehaviour
         history = "";
     }
 
+    // store the player's input in the history string
     public static void Log(Hand lastPlay)
     {
         switch(lastPlay)
@@ -44,6 +45,7 @@ public class AIBehaviour : MonoBehaviour
         }
     }
 
+    // calculate the next move using n-grams on our history
     public static Hand GetNextPlay()
     {
         int size = instance.gramSize;
@@ -99,12 +101,11 @@ public class AIBehaviour : MonoBehaviour
             index = history.IndexOf(gram);
         }
 
-        Debug.Log(rockCount + " " + papeCount + " " + scisCount);
-
         // now to calculate which hand to play
         return ChooseHandGivenOccurences(rockCount, papeCount, scisCount);
     }
 
+    // return the best hand given the predicted frequency
     static Hand ChooseHandGivenOccurences(int rockCount, int papeCount, int scisCount)
     {
         // if one hand clearly wins, play its counter
@@ -149,6 +150,7 @@ public class AIBehaviour : MonoBehaviour
         return ChooseRandomFromSelection(new Hand[] { Hand.Rock, Hand.Paper, Hand.Scissors });
     }
 
+    // return a random hand from the given selection
     static Hand ChooseRandomFromSelection(Hand[] choices)
     {
         return choices[Random.Range(0, choices.Length)];

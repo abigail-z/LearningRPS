@@ -21,7 +21,7 @@ public class GameDirector : MonoBehaviour
     public static void Play(Hand playerInput)
     {
         Hand AIInput = AIBehaviour.GetNextPlay();
-        Debug.Log("AI plays " + AIInput);
+        Debug.Log("You play " + playerInput + ", AI plays " + AIInput);
 
         if (playerInput == AIInput)
         {
