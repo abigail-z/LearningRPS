@@ -44,8 +44,6 @@ public class NGramStrategy : IStrategy
 
         // get last inputs from end of history - this is the n-gram
         string gram = history.Substring(history.Length - size);
-        // remove the gram from the history
-        history = history.Remove(history.Length - size);
 
         // counts of each occurence
         int rockCount = 0;
