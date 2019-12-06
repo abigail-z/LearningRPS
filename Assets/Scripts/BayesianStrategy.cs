@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class BayesianStrategy : IStrategy
 {
+    readonly int size;
+    Queue<Hand> history;
+
+    public BayesianStrategy(int maxQueueSize)
+    {
+        size = maxQueueSize;
+        history = new Queue<Hand>();
+    }
+
     public Hand GetNextPlay()
     {
         return Hand.Rock;
@@ -11,6 +20,10 @@ public class BayesianStrategy : IStrategy
 
     public void Log(Hand lastPlay)
     {
-        // todo
+        history.Enqueue(lastPlay);
+        while (history.Count > size)
+        {
+            history.Dequeue();
+        }
     }
 }
