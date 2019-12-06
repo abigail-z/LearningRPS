@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NGramStrategy : AIStrategy
+public class NGramStrategy : IStrategy
 {
     private string history;
     private readonly int size;
@@ -14,7 +14,7 @@ public class NGramStrategy : AIStrategy
     }
 
     // store the player's input in the history string
-    public override void Log(Hand lastPlay)
+    public void Log(Hand lastPlay)
     {
         switch (lastPlay)
         {
@@ -31,7 +31,7 @@ public class NGramStrategy : AIStrategy
     }
 
     // predict the best next play using n-grams
-    public override Hand GetNextPlay()
+    public Hand GetNextPlay()
     {
         // get history string from instance
         string history = this.history;

@@ -7,7 +7,7 @@ public class AIBehaviour : MonoBehaviour
 {
     // instance vars
     public int gramSize;
-    private AIStrategy strategy;
+    private IStrategy strategy;
 
     // static vars
     private static AIBehaviour instance;
